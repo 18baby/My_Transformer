@@ -59,7 +59,7 @@ class Transformer(nn.Module):
         mask -> [batch_size, 1, seq_len, 1]
         """
         trg_len = trg.shape[1]
-        trg_sub_mask = torch.tril(torch.ones(trg_len, trg_len)).type(torch.ByteTensor).to(self.device)  # torch.tril: 하삼각행렬 생성
+        trg_sub_mask = torch.tril(torch.ones(trg_len, trg_len)).type(torch.bool).to(self.device)  # torch.tril: 하삼각행렬 생성
         trg_mask = trg_pad_mask & trg_sub_mask
 
         return trg_mask  # [batch_size, 1, trg_len, trg_len]
