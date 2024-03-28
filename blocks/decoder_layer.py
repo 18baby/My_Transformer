@@ -51,6 +51,7 @@ class DecoderLayer(nn.Module):
             x = self.norm2(x + _x)
 
         # ===== Layer 3 =====
+        _x = x
         # ffnn
         x = self.ffnn(x)
 

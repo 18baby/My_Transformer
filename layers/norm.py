@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-class LayerNorm(nn.module):
+class LayerNorm(nn.Module):
     def __init__(self, d_model, eps=1e-12):
         super(LayerNorm, self).__init__()
         self.gamma = nn.Parameter(torch.ones(d_model))   # 정규화 가중치

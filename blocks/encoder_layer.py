@@ -35,6 +35,7 @@ class EncoderLayer(nn.Module):
         x = self.norm1(x + _x)
 
         # ===== Layer 2 =====
+        _x = x
         # ffnn
         x = self.ffnn(x)
 

@@ -22,7 +22,7 @@ class ScaleDotProductAttention(nn.Module):
 
         # 2. masking 적용
         if mask is not None:
-            score = score.masked_fill(mask==0, -10000)     # 디코더에서 현시점 이후의 단어들을 모두 -10000으로 마스킹 진행
+            score = score.masked_fill(mask==0, -1e9)     # 디코더에서 현시점 이후의 단어들을 모두 -10000으로 마스킹 진행
 
         # 3. attention distribution 계산
         attention_dist = self.softmax(attention_score)

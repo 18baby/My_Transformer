@@ -36,8 +36,8 @@ class Transformer(nn.Module):
                             device=device)
     
     def forward(self, src, trg):
-        src_mask = self.make_src_mask(src)
-        trg_mask = self.make_trg_mask(trg)
+        src_mask = self.make_src_mask(src)   # padding mask
+        trg_mask = self.make_trg_mask(trg)   # look ahead mask
         enc_src = self.encoder(src, src_mask)
         output = self.decoder(trg, enc_src, trg_mask, src_mask)
         return output
@@ -45,6 +45,7 @@ class Transformer(nn.Module):
     def make_src_mask(self, src):
         src_mask = (src != self.src_pad_idx).unsqueeze(1).unsqueeze(2)        
         """
+        padding mask
         src = [batch_size, seq_len]
         mask -> [batch_size, 1, 1, seq_len]
         """
@@ -53,6 +54,7 @@ class Transformer(nn.Module):
     def make_trg_mask(self, trg):
         trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(3)
         """
+        look_ahead_mask 
         trg = [batch_size, trg_len]
         mask -> [batch_size, 1, seq_len, 1]
         """
