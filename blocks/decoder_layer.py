@@ -23,7 +23,7 @@ class DecoderLayer(nn.Module):
         self.dropout2 = nn.Dropout(p=drop_prob)
 
         # FFNN
-        self.ffnn = PositionWiseFeedFoward(d_model=d_model, ffn_hidden=ffn_hidden, drop_prob=drop_prob)
+        self.ffnn = PositionWiseFeedFoward(d_model, ffn_hidden, drop_prob=drop_prob)
         self.norm3 = LayerNorm(d_model=d_model)
         self.dropout3 = nn.Dropout(p=drop_prob)
 
