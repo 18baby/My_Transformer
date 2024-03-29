@@ -1,5 +1,5 @@
-from torchtext.legacy.data import Field, BucketIterator
-from torchtext.legacy.datasets.translation import Multi30k
+from torchtext.data import Field, BucketIterator
+from torchtext.datasets import Multi30k
 
 
 class DataLoader:
