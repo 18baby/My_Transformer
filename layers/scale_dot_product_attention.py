@@ -10,15 +10,15 @@ class ScaleDotProductAttention(nn.Module):
 
     def forward(self, q, k, v, mask=None, e=1e-12):
         """
-        입력 = [batch_size, n_head, n_seq, d_model]
+        입력 = [batch_size, n_head, n_seq, d_v]
         n_seq: 입력 단어수
         d_model: 단어 임베딩 차원
         """
-        batch_size, n_head, n_seq, d_model = k.size()
+        batch_size, n_head, n_seq, d_k = k.size()
 
         # 1. attention score 계산
         k_t = k.transpose(2, 3)   
-        attention_score = (k_t @ q)/math.sqrt(d_model)
+        attention_score = (k_t @ q)/math.sqrt(d_k)
 
         # 2. masking 적용
         if mask is not None:

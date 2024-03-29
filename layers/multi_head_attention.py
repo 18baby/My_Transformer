@@ -39,12 +39,12 @@ class MultiHeadAttention(nn.Module):
         """
         q, k, v를 head 별로 분할
         입력되는 q, k, v의 차원: [batch_size, n_seq, d_model]
-        출력되는 q, k, v의 차원: [batch_size, n_seq, self.head, d_v]
+        출력되는 q, k, v의 차원: [batch_size, self.head, n_seq, d_v]
         """
         batch_size, n_seq, d_model = tensor.size()
 
         d_v = d_model // self.n_head    # q, k, v의 마지막 차원
-        tensor = tensor.view(batch_size, n_seq, self.n_head, d_v).transpose(1, 2)
+        tensor = tensor.view(batch_size, n_seq, self.n_head, d_v).transpose(1, 2)   # 한번에 계산했던거를 나누기
         
         return tensor
     

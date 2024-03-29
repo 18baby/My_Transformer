@@ -9,8 +9,8 @@ class Decoder(nn.Module):
         super().__init__()
         # 임배딩 생성
         self.emb = TransformerEmbedding(d_model=d_model,               # 입력 차원
-                                        max_len=max_len,               # 최대 길이
-                                        vocab_size=dec_voc_size,       # 입력 단어 크기
+                                        max_len=max_len,               # 문장내 최대 단어 개수
+                                        vocab_size=dec_voc_size,       
                                         drop_prob=drop_prob,
                                         device=device)
         
@@ -27,7 +27,7 @@ class Decoder(nn.Module):
         trg = self.emb(trg)    # 디코더 입력 임배딩 진행
 
         for layer in self.layers:
-            trg = layer(enc_src, trg, trg_mask, src_mask)
+            trg = layer(trg, enc_src, trg_mask, src_mask)
 
         out = self.linear(trg)
 

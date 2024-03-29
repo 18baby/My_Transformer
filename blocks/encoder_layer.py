@@ -28,10 +28,8 @@ class EncoderLayer(nn.Module):
         _x = x
         x = self.attention(q=x, k=x, v=x, mask=src_mask)
 
-        # dropout
+        # dropout, add & norm
         x = self.dropout1(x)
-
-        # add & norm
         x = self.norm1(x + _x)
 
         # ===== Layer 2 =====
@@ -39,10 +37,8 @@ class EncoderLayer(nn.Module):
         # ffnn
         x = self.ffnn(x)
 
-        # dropout
+        # dropout, add & norm
         x = self.dropout2(x)
-
-        # add & norm
         x = self.norm2(x + _x)
 
         return x
